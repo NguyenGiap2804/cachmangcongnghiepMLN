@@ -16,6 +16,186 @@
             50% { transform: translateY(-20px); }
         }
         
+        /* Space background animations */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes shooting-star {
+            0% { 
+                transform: translateX(-100px) translateY(100px) rotate(45deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes planet-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes nebula-drift {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(20px) translateY(-10px) rotate(90deg); }
+            50% { transform: translateX(0) translateY(-20px) rotate(180deg); }
+            75% { transform: translateX(-20px) translateY(-10px) rotate(270deg); }
+        }
+        
+        .space-background {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .space-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+        
+        .space-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 25px 25px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 75px 75px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 125px 25px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 175px 75px, rgba(255,255,255,0.5), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 6s ease-in-out infinite alternate-reverse;
+            z-index: 1;
+        }
+        
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #fff, transparent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, -20px -20px 20px rgba(255,255,255,0.5);
+            animation: shooting-star 3s linear infinite;
+            z-index: 2;
+        }
+        
+        .shooting-star:nth-child(1) { 
+            top: 20%; 
+            animation-delay: 0s; 
+            animation-duration: 3s;
+        }
+        .shooting-star:nth-child(2) { 
+            top: 40%; 
+            animation-delay: 1s; 
+            animation-duration: 2.5s;
+        }
+        .shooting-star:nth-child(3) { 
+            top: 60%; 
+            animation-delay: 2s; 
+            animation-duration: 3.5s;
+        }
+        .shooting-star:nth-child(4) { 
+            top: 80%; 
+            animation-delay: 0.5s; 
+            animation-duration: 2.8s;
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .planet-1 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a24);
+            top: 10%;
+            right: 10%;
+            animation: planet-rotate 20s linear infinite, float 8s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .planet-2 {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
+            bottom: 20%;
+            left: 15%;
+            animation: planet-rotate 15s linear infinite reverse, float 6s ease-in-out infinite;
+            animation-delay: -2s;
+            box-shadow: 0 0 20px rgba(116, 185, 255, 0.3);
+        }
+        
+        .planet-3 {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7);
+            top: 50%;
+            left: 5%;
+            animation: planet-rotate 25s linear infinite, float 10s ease-in-out infinite;
+            animation-delay: -4s;
+            box-shadow: 0 0 15px rgba(162, 155, 254, 0.3);
+        }
+        
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 1;
+        }
+        
+        .nebula-1 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1), transparent);
+            top: 10%;
+            left: 20%;
+            animation: nebula-drift 30s ease-in-out infinite;
+        }
+        
+        .nebula-2 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(116, 185, 255, 0.1), transparent);
+            bottom: 30%;
+            right: 25%;
+            animation: nebula-drift 25s ease-in-out infinite reverse;
+            animation-delay: -10s;
+        }
+        
+        .nebula-3 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(162, 155, 254, 0.1), transparent);
+            top: 60%;
+            left: 60%;
+            animation: nebula-drift 35s ease-in-out infinite;
+            animation-delay: -15s;
+        }
+        
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
             50% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.6); }
@@ -55,9 +235,7 @@
         }
         
         .video-hero {
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
             position: relative;
             overflow: hidden;
         }
@@ -67,9 +245,17 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s ease-in-out infinite alternate;
             z-index: 1;
         }
         
@@ -78,9 +264,16 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 25px 25px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 75px 75px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 125px 25px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 175px 75px, rgba(255,255,255,0.5), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 6s ease-in-out infinite alternate-reverse;
             z-index: 1;
         }
         
@@ -109,9 +302,10 @@
         
         .content-box {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -132,8 +326,10 @@
         }
         
         .content-box:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.95));
         }
         
         .gradient-button {
@@ -193,30 +389,427 @@
             to { opacity: 1; }
         }
         
-        @keyframes modalSlideIn {
-            from { 
-                opacity: 0; 
-                transform: scale(0.7) translateY(-50px) rotateX(10deg);
+        /* Hand animations */
+        @keyframes handPullLeft {
+            0% { 
+                transform: translateX(0) rotate(0deg) scale(0.8);
+                opacity: 0;
             }
-            to { 
-                opacity: 1; 
-                transform: scale(1) translateY(0) rotateX(0deg);
+            15% { 
+                opacity: 1;
+                transform: translateX(-15px) rotate(-8deg) scale(1);
+            }
+            40% { 
+                transform: translateX(-35px) rotate(-12deg) scale(1.1);
+            }
+            70% { 
+                transform: translateX(-55px) rotate(-18deg) scale(1.05);
+            }
+            100% { 
+                transform: translateX(-70px) rotate(-25deg) scale(1);
+                opacity: 0;
             }
         }
         
-        @keyframes modalSlideOut {
-            from { 
-                opacity: 1; 
-                transform: scale(1) translateY(0) rotateX(0deg);
+        @keyframes handPullRight {
+            0% { 
+                transform: translateX(0) rotate(0deg) scale(0.8);
+                opacity: 0;
             }
-            to { 
-                opacity: 0; 
-                transform: scale(0.7) translateY(-50px) rotateX(10deg);
+            15% { 
+                opacity: 1;
+                transform: translateX(15px) rotate(8deg) scale(1);
+            }
+            40% { 
+                transform: translateX(35px) rotate(12deg) scale(1.1);
+            }
+            70% { 
+                transform: translateX(55px) rotate(18deg) scale(1.05);
+            }
+            100% { 
+                transform: translateX(70px) rotate(25deg) scale(1);
+                opacity: 0;
             }
         }
         
-        .modal-closing {
-            animation: modalSlideOut 0.3s ease-in forwards;
+        @keyframes handPullUp {
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+                transform: translateY(-15px) rotate(-8deg) scale(1);
+            }
+            40% { 
+                transform: translateY(-35px) rotate(-12deg) scale(1.1);
+            }
+            70% { 
+                transform: translateY(-55px) rotate(-18deg) scale(1.05);
+            }
+            100% { 
+                transform: translateY(-70px) rotate(-25deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes handPullDown {
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+                transform: translateY(15px) rotate(8deg) scale(1);
+            }
+            40% { 
+                transform: translateY(35px) rotate(12deg) scale(1.1);
+            }
+            70% { 
+                transform: translateY(55px) rotate(18deg) scale(1.05);
+            }
+            100% { 
+                transform: translateY(70px) rotate(25deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes handPullDiagonal1 {
+            0% { 
+                transform: translate(0, 0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+                transform: translate(-15px, -15px) rotate(-8deg) scale(1);
+            }
+            40% { 
+                transform: translate(-35px, -35px) rotate(-12deg) scale(1.1);
+            }
+            70% { 
+                transform: translate(-55px, -55px) rotate(-18deg) scale(1.05);
+            }
+            100% { 
+                transform: translate(-70px, -70px) rotate(-25deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes handPullDiagonal2 {
+            0% { 
+                transform: translate(0, 0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% { 
+                opacity: 1;
+                transform: translate(15px, 15px) rotate(8deg) scale(1);
+            }
+            40% { 
+                transform: translate(35px, 35px) rotate(12deg) scale(1.1);
+            }
+            70% { 
+                transform: translate(55px, 55px) rotate(18deg) scale(1.05);
+            }
+            100% { 
+                transform: translate(70px, 70px) rotate(25deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes stretchInHorizontal {
+            0% { 
+                opacity: 0; 
+                transform: scaleX(0) scaleY(0.2);
+                transform-origin: center center;
+            }
+            20% { 
+                opacity: 1; 
+                transform: scaleX(0.6) scaleY(0.7);
+                transform-origin: center center;
+            }
+            40% { 
+                opacity: 1; 
+                transform: scaleX(0.9) scaleY(0.95);
+                transform-origin: center center;
+            }
+            60% { 
+                opacity: 1; 
+                transform: scaleX(1.02) scaleY(1.01);
+                transform-origin: center center;
+            }
+            80% { 
+                opacity: 1; 
+                transform: scaleX(0.99) scaleY(0.995);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scaleX(1) scaleY(1);
+                transform-origin: center center;
+            }
+        }
+        
+        @keyframes stretchOutHorizontal {
+            0% { 
+                opacity: 1; 
+                transform: scaleX(1) scaleY(1);
+                transform-origin: center center;
+            }
+            15% { 
+                opacity: 0.95; 
+                transform: scaleX(1.02) scaleY(0.9);
+                transform-origin: center center;
+            }
+            35% { 
+                opacity: 0.8; 
+                transform: scaleX(0.95) scaleY(0.7);
+                transform-origin: center center;
+            }
+            55% { 
+                opacity: 0.6; 
+                transform: scaleX(0.7) scaleY(0.4);
+                transform-origin: center center;
+            }
+            75% { 
+                opacity: 0.3; 
+                transform: scaleX(0.4) scaleY(0.2);
+                transform-origin: center center;
+            }
+            90% { 
+                opacity: 0.1; 
+                transform: scaleX(0.1) scaleY(0.1);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 0; 
+                transform: scaleX(0) scaleY(0.05);
+                transform-origin: center center;
+            }
+        }
+        
+        @keyframes stretchInVertical {
+            0% { 
+                opacity: 0; 
+                transform: scaleY(0) scaleX(0.2);
+                transform-origin: center center;
+            }
+            20% { 
+                opacity: 1; 
+                transform: scaleY(0.6) scaleX(0.7);
+                transform-origin: center center;
+            }
+            40% { 
+                opacity: 1; 
+                transform: scaleY(0.9) scaleX(0.95);
+                transform-origin: center center;
+            }
+            60% { 
+                opacity: 1; 
+                transform: scaleY(1.02) scaleX(1.01);
+                transform-origin: center center;
+            }
+            80% { 
+                opacity: 1; 
+                transform: scaleY(0.99) scaleX(0.995);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scaleY(1) scaleX(1);
+                transform-origin: center center;
+            }
+        }
+        
+        @keyframes stretchOutVertical {
+            0% { 
+                opacity: 1; 
+                transform: scaleY(1) scaleX(1);
+                transform-origin: center center;
+            }
+            15% { 
+                opacity: 0.95; 
+                transform: scaleY(1.02) scaleX(0.9);
+                transform-origin: center center;
+            }
+            35% { 
+                opacity: 0.8; 
+                transform: scaleY(0.95) scaleX(0.7);
+                transform-origin: center center;
+            }
+            55% { 
+                opacity: 0.6; 
+                transform: scaleY(0.7) scaleX(0.4);
+                transform-origin: center center;
+            }
+            75% { 
+                opacity: 0.3; 
+                transform: scaleY(0.4) scaleX(0.2);
+                transform-origin: center center;
+            }
+            90% { 
+                opacity: 0.1; 
+                transform: scaleY(0.1) scaleX(0.1);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 0; 
+                transform: scaleY(0) scaleX(0.05);
+                transform-origin: center center;
+            }
+        }
+        
+        @keyframes stretchInDiagonal {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-1deg);
+                transform-origin: center center;
+            }
+            20% { 
+                opacity: 1; 
+                transform: scale(0.6) rotate(-0.5deg);
+                transform-origin: center center;
+            }
+            40% { 
+                opacity: 1; 
+                transform: scale(0.9) rotate(0deg);
+                transform-origin: center center;
+            }
+            60% { 
+                opacity: 1; 
+                transform: scale(1.02) rotate(0.2deg);
+                transform-origin: center center;
+            }
+            80% { 
+                opacity: 1; 
+                transform: scale(0.99) rotate(0.1deg);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg);
+                transform-origin: center center;
+            }
+        }
+        
+        @keyframes stretchOutDiagonal {
+            0% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg);
+                transform-origin: center center;
+            }
+            15% { 
+                opacity: 0.95; 
+                transform: scale(1.02) rotate(0.2deg);
+                transform-origin: center center;
+            }
+            35% { 
+                opacity: 0.8; 
+                transform: scale(0.95) rotate(0.5deg);
+                transform-origin: center center;
+            }
+            55% { 
+                opacity: 0.6; 
+                transform: scale(0.7) rotate(0deg);
+                transform-origin: center center;
+            }
+            75% { 
+                opacity: 0.3; 
+                transform: scale(0.4) rotate(-1deg);
+                transform-origin: center center;
+            }
+            90% { 
+                opacity: 0.1; 
+                transform: scale(0.1) rotate(-2deg);
+                transform-origin: center center;
+            }
+            100% { 
+                opacity: 0; 
+                transform: scale(0) rotate(-3deg);
+                transform-origin: center center;
+            }
+        }
+        
+        .stretch-in-horizontal {
+            animation: stretchInHorizontal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stretch-out-horizontal {
+            animation: stretchOutHorizontal 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+        
+        .stretch-in-vertical {
+            animation: stretchInVertical 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stretch-out-vertical {
+            animation: stretchOutVertical 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+        
+        .stretch-in-diagonal {
+            animation: stretchInDiagonal 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stretch-out-diagonal {
+            animation: stretchOutDiagonal 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+        
+        /* Hand elements */
+        .stretch-hands {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .hand-left {
+            position: absolute;
+            left: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            animation: handPullLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hand-right {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            animation: handPullRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hand-up {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            animation: handPullUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hand-down {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            animation: handPullDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hand-diagonal-1 {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            font-size: 2.5rem;
+            animation: handPullDiagonal1 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .hand-diagonal-2 {
+            position: absolute;
+            bottom: -60px;
+            right: -60px;
+            font-size: 2.5rem;
+            animation: handPullDiagonal2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
         .modal-header-glow {
@@ -270,114 +863,199 @@
         
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 4px;
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 3px;
+            transition: background 0.3s ease;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
+            background: rgba(107, 114, 128, 0.7);
+        }
+        
+        /* Modal specific scrollbar */
+        .modal-content ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-content ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+            margin: 4px 0;
+        }
+        
+        .modal-content ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 3px;
+            transition: background 0.3s ease;
+        }
+        
+        .modal-content ::-webkit-scrollbar-thumb:hover {
+            background: rgba(107, 114, 128, 0.6);
         }
     </style>
 </head>
 <body class="h-full bg-gray-50">
     <main>
-        <!-- Video Hero Section -->
-        <section class="video-hero min-h-full flex items-center justify-center py-20 px-4">
-            <div class="video-container max-w-4xl w-full text-center">
-                <!-- Video Title -->
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg text-glow floating-element">
-                    🎬 Video Đặc Biệt
-                </h1>
-                
-                <!-- Video Description -->
-                <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Khám phá nội dung tuyệt vời trong video nổi bật này. Một trải nghiệm không thể bỏ lỡ!
-                </p>
-                
-                <!-- Video Player -->
-                <div class="relative bg-black rounded-2xl overflow-hidden glow-effect mx-auto max-w-3xl">
-                    <video 
-                        id="heroVideo" 
-                        class="w-full h-auto" 
-                        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23000'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%23fff' font-size='24' font-family='Arial'%3E🎥 Video Sẵn Sàng Phát%3C/text%3E%3C/svg%3E"
-                        controls
-                        preload="metadata"
-                    >
-                        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-                        <p class="text-white p-8">Trình duyệt của bạn không hỗ trợ video HTML5.</p>
-                    </video>
+        <!-- Main Content Section -->
+        <section class="py-20 px-4 space-background relative overflow-hidden min-h-full">
+            <!-- Space elements -->
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            <div class="shooting-star"></div>
+            
+            <div class="planet planet-1"></div>
+            <div class="planet planet-2"></div>
+            <div class="planet planet-3"></div>
+            
+            <!-- Additional planets -->
+            <div class="planet" style="width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #ffeaa7, #fdcb6e); top: 25%; right: 5%; animation: planet-rotate 22s linear infinite, float 9s ease-in-out infinite; animation-delay: -1s; box-shadow: 0 0 25px rgba(255, 234, 167, 0.4);"></div>
+            
+            <div class="planet" style="width: 35px; height: 35px; background: radial-gradient(circle at 30% 30%, #fd79a8, #e84393); bottom: 15%; right: 40%; animation: planet-rotate 16s linear infinite reverse, float 7s ease-in-out infinite; animation-delay: -3s; box-shadow: 0 0 18px rgba(253, 121, 168, 0.4);"></div>
+            
+            <div class="planet" style="width: 45px; height: 45px; background: radial-gradient(circle at 30% 30%, #00b894, #00a085); top: 70%; right: 20%; animation: planet-rotate 19s linear infinite, float 8s ease-in-out infinite; animation-delay: -2s; box-shadow: 0 0 22px rgba(0, 184, 148, 0.4);"></div>
+            
+            <div class="planet" style="width: 25px; height: 25px; background: radial-gradient(circle at 30% 30%, #e17055, #d63031); top: 40%; left: 25%; animation: planet-rotate 14s linear infinite reverse, float 6s ease-in-out infinite; animation-delay: -4s; box-shadow: 0 0 12px rgba(225, 112, 85, 0.4);"></div>
+            
+            <div class="planet" style="width: 55px; height: 55px; background: radial-gradient(circle at 30% 30%, #81ecec, #00cec9); bottom: 40%; left: 35%; animation: planet-rotate 24s linear infinite, float 10s ease-in-out infinite; animation-delay: -1.5s; box-shadow: 0 0 28px rgba(129, 236, 236, 0.4);"></div>
+            
+            <div class="planet" style="width: 38px; height: 38px; background: radial-gradient(circle at 30% 30%, #fab1a0, #e17055); top: 15%; left: 45%; animation: planet-rotate 17s linear infinite reverse, float 7.5s ease-in-out infinite; animation-delay: -2.5s; box-shadow: 0 0 19px rgba(250, 177, 160, 0.4);"></div>
+            
+            <div class="planet" style="width: 42px; height: 42px; background: radial-gradient(circle at 30% 30%, #fd79a8, #fdcb6e); bottom: 60%; right: 15%; animation: planet-rotate 21s linear infinite, float 8.5s ease-in-out infinite; animation-delay: -3.5s; box-shadow: 0 0 21px rgba(253, 121, 168, 0.3);"></div>
+            
+            <div class="planet" style="width: 28px; height: 28px; background: radial-gradient(circle at 30% 30%, #55a3ff, #2d3436); top: 80%; left: 60%; animation: planet-rotate 13s linear infinite reverse, float 5.5s ease-in-out infinite; animation-delay: -4.5s; box-shadow: 0 0 14px rgba(85, 163, 255, 0.4);"></div>
+            
+            <!-- 20 more planets -->
+            <div class="planet" style="width: 32px; height: 32px; background: radial-gradient(circle at 30% 30%, #ff7675, #d63031); top: 5%; left: 10%; animation: planet-rotate 18s linear infinite, float 6.5s ease-in-out infinite; animation-delay: -5s; box-shadow: 0 0 16px rgba(255, 118, 117, 0.4);"></div>
+            
+            <div class="planet" style="width: 48px; height: 48px; background: radial-gradient(circle at 30% 30%, #6c5ce7, #a29bfe); bottom: 5%; right: 8%; animation: planet-rotate 26s linear infinite reverse, float 9.5s ease-in-out infinite; animation-delay: -6s; box-shadow: 0 0 24px rgba(108, 92, 231, 0.4);"></div>
+            
+            <div class="planet" style="width: 22px; height: 22px; background: radial-gradient(circle at 30% 30%, #00cec9, #55efc4); top: 35%; right: 3%; animation: planet-rotate 12s linear infinite, float 5s ease-in-out infinite; animation-delay: -7s; box-shadow: 0 0 11px rgba(0, 206, 201, 0.4);"></div>
+            
+            <div class="planet" style="width: 40px; height: 40px; background: radial-gradient(circle at 30% 30%, #fdcb6e, #e17055); bottom: 25%; left: 8%; animation: planet-rotate 20s linear infinite reverse, float 8s ease-in-out infinite; animation-delay: -8s; box-shadow: 0 0 20px rgba(253, 203, 110, 0.4);"></div>
+            
+            <div class="planet" style="width: 36px; height: 36px; background: radial-gradient(circle at 30% 30%, #fd79a8, #6c5ce7); top: 60%; left: 2%; animation: planet-rotate 15s linear infinite, float 7s ease-in-out infinite; animation-delay: -9s; box-shadow: 0 0 18px rgba(253, 121, 168, 0.4);"></div>
+            
+            <div class="planet" style="width: 44px; height: 44px; background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3); top: 8%; right: 25%; animation: planet-rotate 23s linear infinite reverse, float 8.5s ease-in-out infinite; animation-delay: -10s; box-shadow: 0 0 22px rgba(116, 185, 255, 0.4);"></div>
+            
+            <div class="planet" style="width: 26px; height: 26px; background: radial-gradient(circle at 30% 30%, #00b894, #55efc4); bottom: 8%; left: 25%; animation: planet-rotate 11s linear infinite, float 5.5s ease-in-out infinite; animation-delay: -11s; box-shadow: 0 0 13px rgba(0, 184, 148, 0.4);"></div>
+            
+            <div class="planet" style="width: 52px; height: 52px; background: radial-gradient(circle at 30% 30%, #e84393, #fd79a8); top: 45%; right: 35%; animation: planet-rotate 27s linear infinite reverse, float 10s ease-in-out infinite; animation-delay: -12s; box-shadow: 0 0 26px rgba(232, 67, 147, 0.4);"></div>
+            
+            <div class="planet" style="width: 30px; height: 30px; background: radial-gradient(circle at 30% 30%, #fab1a0, #ff7675); bottom: 35%; right: 5%; animation: planet-rotate 13s linear infinite, float 6s ease-in-out infinite; animation-delay: -13s; box-shadow: 0 0 15px rgba(250, 177, 160, 0.4);"></div>
+            
+            <div class="planet" style="width: 38px; height: 38px; background: radial-gradient(circle at 30% 30%, #81ecec, #74b9ff); top: 20%; left: 70%; animation: planet-rotate 16s linear infinite reverse, float 7.5s ease-in-out infinite; animation-delay: -14s; box-shadow: 0 0 19px rgba(129, 236, 236, 0.4);"></div>
+            
+            <div class="planet" style="width: 34px; height: 34px; background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7); bottom: 50%; left: 15%; animation: planet-rotate 14s linear infinite, float 6.5s ease-in-out infinite; animation-delay: -15s; box-shadow: 0 0 17px rgba(162, 155, 254, 0.4);"></div>
+            
+            <div class="planet" style="width: 46px; height: 46px; background: radial-gradient(circle at 30% 30%, #ffeaa7, #fdcb6e); top: 75%; right: 45%; animation: planet-rotate 25s linear infinite reverse, float 9s ease-in-out infinite; animation-delay: -16s; box-shadow: 0 0 23px rgba(255, 234, 167, 0.4);"></div>
+            
+            <div class="planet" style="width: 24px; height: 24px; background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a24); top: 55%; left: 80%; animation: planet-rotate 10s linear infinite, float 5s ease-in-out infinite; animation-delay: -17s; box-shadow: 0 0 12px rgba(255, 107, 107, 0.4);"></div>
+            
+            <div class="planet" style="width: 41px; height: 41px; background: radial-gradient(circle at 30% 30%, #00cec9, #00b894); bottom: 70%; right: 30%; animation: planet-rotate 21s linear infinite reverse, float 8s ease-in-out infinite; animation-delay: -18s; box-shadow: 0 0 20px rgba(0, 206, 201, 0.4);"></div>
+            
+            <div class="planet" style="width: 29px; height: 29px; background: radial-gradient(circle at 30% 30%, #e17055, #d63031); top: 30%; left: 55%; animation: planet-rotate 12s linear infinite, float 6s ease-in-out infinite; animation-delay: -19s; box-shadow: 0 0 14px rgba(225, 112, 85, 0.4);"></div>
+            
+            <div class="planet" style="width: 47px; height: 47px; background: radial-gradient(circle at 30% 30%, #fd79a8, #e84393); bottom: 12%; left: 50%; animation: planet-rotate 24s linear infinite reverse, float 9s ease-in-out infinite; animation-delay: -20s; box-shadow: 0 0 23px rgba(253, 121, 168, 0.4);"></div>
+            
+            <div class="planet" style="width: 33px; height: 33px; background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3); top: 65%; right: 60%; animation: planet-rotate 15s linear infinite, float 7s ease-in-out infinite; animation-delay: -21s; box-shadow: 0 0 16px rgba(116, 185, 255, 0.4);"></div>
+            
+            <div class="planet" style="width: 39px; height: 39px; background: radial-gradient(circle at 30% 30%, #55efc4, #00b894); top: 12%; left: 30%; animation: planet-rotate 18s linear infinite reverse, float 7.5s ease-in-out infinite; animation-delay: -22s; box-shadow: 0 0 19px rgba(85, 239, 196, 0.4);"></div>
+            
+            <div class="planet" style="width: 27px; height: 27px; background: radial-gradient(circle at 30% 30%, #fab1a0, #e17055); bottom: 45%; right: 50%; animation: planet-rotate 11s linear infinite, float 5.5s ease-in-out infinite; animation-delay: -23s; box-shadow: 0 0 13px rgba(250, 177, 160, 0.4);"></div>
+            
+            <div class="planet" style="width: 43px; height: 43px; background: radial-gradient(circle at 30% 30%, #a29bfe, #fd79a8); top: 85%; left: 40%; animation: planet-rotate 22s linear infinite reverse, float 8.5s ease-in-out infinite; animation-delay: -24s; box-shadow: 0 0 21px rgba(162, 155, 254, 0.4);"></div>
+            
+            <div class="nebula nebula-1"></div>
+            <div class="nebula nebula-2"></div>
+            <div class="nebula nebula-3"></div>
+            
+            <div class="max-w-6xl mx-auto relative z-10">
+                <!-- Video Hero Section -->
+                <div class="text-center mb-20 stagger-animation">
+                    <!-- Video Title -->
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg text-glow floating-element">
+                        🎬 Video Đặc Biệt
+                    </h1>
                     
-                    <!-- Custom Play Button Overlay -->
-                    <div id="playOverlay" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 cursor-pointer">
-                        <button class="play-button bg-red-600 hover:bg-red-700 text-white rounded-full p-6 shadow-2xl">
-                            <svg class="w-16 h-16 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
+                    <!-- Video Description -->
+                    <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        Khám phá nội dung tuyệt vời trong video nổi bật này. Một trải nghiệm không thể bỏ lỡ!
+                    </p>
+                    
+                    <!-- Video Player -->
+                    <div class="relative bg-black rounded-2xl overflow-hidden glow-effect mx-auto max-w-3xl mb-8">
+                        <video 
+                            id="heroVideo" 
+                            class="w-full h-auto" 
+                            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23000'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%23fff' font-size='24' font-family='Arial'%3E🎥 Video Sẵn Sàng Phát%3C/text%3E%3C/svg%3E"
+                            controls
+                            preload="metadata"
+                        >
+                            <source src="video/CacMangCongNghiep.mp4" type="video/mp4">
+                            <p class="text-white p-8">Trình duyệt của bạn không hỗ trợ video HTML5.</p>
+                        </video>
+                        
+                        <!-- Custom Play Button Overlay -->
+                        <div id="playOverlay" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 cursor-pointer">
+                            <button class="play-button bg-red-600 hover:bg-red-700 text-white rounded-full p-6 shadow-2xl">
+                                <svg class="w-16 h-16 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Stats -->
+                    <div class="flex justify-center space-x-8 mb-8 text-white">
+                        <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
+                            <div class="text-2xl font-bold text-glow">1.2M</div>
+                            <div class="text-sm opacity-80">Lượt xem</div>
+                        </div>
+                        <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
+                            <div class="text-2xl font-bold text-glow">45K</div>
+                            <div class="text-sm opacity-80">Lượt thích</div>
+                        </div>
+                        <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
+                            <div class="text-2xl font-bold text-glow">2.8K</div>
+                            <div class="text-sm opacity-80">Bình luận</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                        <button class="bg-white text-purple-700 px-8 py-4 rounded-full font-semibold shadow-lg gradient-button">
+                            📱 Chia sẻ video
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold glass-effect gradient-button">
+                            ⭐ Thêm vào yêu thích
                         </button>
                     </div>
                 </div>
                 
-                <!-- Video Stats -->
-                <div class="flex justify-center space-x-8 mt-8 text-white">
-                    <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
-                        <div class="text-2xl font-bold text-glow">1.2M</div>
-                        <div class="text-sm opacity-80">Lượt xem</div>
-                    </div>
-                    <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
-                        <div class="text-2xl font-bold text-glow">45K</div>
-                        <div class="text-sm opacity-80">Lượt thích</div>
-                    </div>
-                    <div class="text-center glass-effect p-4 rounded-xl stagger-animation">
-                        <div class="text-2xl font-bold text-glow">2.8K</div>
-                        <div class="text-sm opacity-80">Bình luận</div>
-                    </div>
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-                    <button class="bg-white text-purple-700 px-8 py-4 rounded-full font-semibold shadow-lg gradient-button">
-                        📱 Chia sẻ video
-                    </button>
-                    <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold glass-effect gradient-button">
-                        ⭐ Thêm vào yêu thích
-                    </button>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Main Content Section -->
-        <section class="py-20 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 relative overflow-hidden">
-            <!-- Floating background elements -->
-            <div class="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-10 floating-element"></div>
-            <div class="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-10 floating-element" style="animation-delay: -3s;"></div>
-            <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full opacity-10 floating-element" style="animation-delay: -1.5s;"></div>
-            
-            <div class="max-w-6xl mx-auto relative z-10">
                 <!-- Main Title -->
                 <div class="text-center mb-16 stagger-animation">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 text-glow">
-                        CÁC CUỘC CÁCH MẠNG CÔNG NGHIỆP
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 text-glow">
+                        TIÊU ĐỀ CHÍNH
                     </h2>
-                    <p class="text-xs text-gray-500 mb-6 max-w-2xl mx-auto leading-relaxed">
-                        Dưới góc nhìn “7 chiếc lá 3 màu”, hành trình từ 1.0 đến 4.0 cho thấy công nghệ không ngừng tái định nghĩa cách chúng ta sản xuất, sống và tư duy.
-                        1.0 mở đầu cơ giới hóa bằng hơi nước; 2.0 đưa điện và dây chuyền vào sản xuất hàng loạt.
-                        3.0 bùng nổ máy tính và tự động hóa; 4.0 là AI, IoT, dữ liệu lớn kiến tạo kinh tế số.
-                        Cùng chúng mình khám phá tác động xã hội–kinh tế–văn hóa và rút ra bài học thiết thực cho kỷ nguyên mới.
+                    <p class="text-xs text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+                        Đây là mô tả ngắn gọn về nội dung chính. Bạn có thể thay đổi văn bản này để phù hợp với mục đích sử dụng của mình.
                     </p>
                     <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full shadow-lg"></div>
                     <div class="w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto rounded-full mt-2 opacity-60"></div>
                 </div>
                 
                 <!-- 4 Content Boxes Grid -->
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
                     <!-- Box 1 -->
                     <div class="content-box rounded-2xl shadow-lg p-8 stagger-animation">
                         <div class="flex items-center mb-6">
@@ -446,13 +1124,34 @@
                         </button>
                     </div>
                 </div>
+                
+                <!-- Box 5 - Centered -->
+                <div class="flex justify-center">
+                    <div class="content-box rounded-2xl shadow-lg p-8 stagger-animation max-w-2xl w-full">
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 shadow-lg floating-element" style="animation-delay: -4s;">
+                                5
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Nội dung đặc biệt</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 text-center">
+                            Đây là ô nội dung đặc biệt thứ 5, được đặt ở giữa để tạo điểm nhấn. 
+                            Ô này có thể chứa thông tin quan trọng nhất hoặc lời kêu gọi hành động chính.
+                        </p>
+                        <div class="text-center">
+                            <button class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold gradient-button shadow-lg text-lg">
+                                🚀 Khám phá ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Modal Overlay -->
     <div id="modalOverlay" class="fixed inset-0 modal-backdrop z-50 hidden flex items-center justify-center p-4">
-        <div class="modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform" id="modalContent">
+        <div class="modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform" id="modalContent">
             <!-- Modal Header -->
             <div class="sticky top-0 modal-header-glow border-b border-gray-200 px-8 py-6 rounded-t-2xl backdrop-filter backdrop-blur-20 z-10">
                 <div class="flex justify-between items-center">
@@ -464,7 +1163,7 @@
             </div>
             
             <!-- Modal Body -->
-            <div class="px-8 py-6 relative z-0">
+            <div class="px-8 py-6 relative z-0 max-h-[calc(90vh-140px)] overflow-y-auto" style="scrollbar-width: thin; scrollbar-color: rgba(156, 163, 175, 0.5) transparent;">
                 <div id="modalBody" class="prose max-w-none modal-body-content">
                     <!-- Content will be inserted here -->
                 </div>
@@ -733,10 +1432,74 @@
                 `,
                 actionText: 'Liên hệ ngay',
                 gradient: 'from-orange-500 to-red-500'
+            },
+            5: {
+                title: 'Nội dung đặc biệt - Premium',
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-indigo-100 to-purple-100 p-6 rounded-xl">
+                            <h3 class="text-2xl font-bold text-indigo-800 mb-4">🚀 Trải nghiệm Premium</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Đây là nội dung đặc biệt dành riêng cho những khách hàng VIP. 
+                                Chúng tôi mang đến những dịch vụ cao cấp và độc quyền nhất.
+                            </p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-6 rounded-xl border border-indigo-200 text-center">
+                                <div class="text-4xl mb-3">👑</div>
+                                <h5 class="font-semibold text-indigo-700 mb-2">VIP Access</h5>
+                                <p class="text-gray-600 text-sm">Quyền truy cập độc quyền</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-indigo-200 text-center">
+                                <div class="text-4xl mb-3">⚡</div>
+                                <h5 class="font-semibold text-indigo-700 mb-2">Tốc độ cao</h5>
+                                <p class="text-gray-600 text-sm">Xử lý nhanh gấp 10 lần</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-indigo-200 text-center">
+                                <div class="text-4xl mb-3">🎯</div>
+                                <h5 class="font-semibold text-indigo-700 mb-2">Tùy chỉnh</h5>
+                                <p class="text-gray-600 text-sm">100% theo yêu cầu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-200">
+                            <h4 class="font-semibold text-indigo-800 mb-4">🌟 Ưu đãi đặc biệt</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between bg-white p-3 rounded-lg">
+                                    <span class="text-gray-700">Tư vấn 1-1 với chuyên gia</span>
+                                    <span class="text-indigo-600 font-semibold">Miễn phí</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-white p-3 rounded-lg">
+                                    <span class="text-gray-700">Hỗ trợ 24/7 ưu tiên</span>
+                                    <span class="text-indigo-600 font-semibold">Bao gồm</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-white p-3 rounded-lg">
+                                    <span class="text-gray-700">Cập nhật tính năng mới</span>
+                                    <span class="text-indigo-600 font-semibold">Sớm nhất</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border-2 border-indigo-300 p-6 rounded-xl text-center">
+                            <h4 class="font-bold text-indigo-800 mb-3 text-xl">💎 Gói Premium</h4>
+                            <div class="text-3xl font-bold text-indigo-600 mb-2">
+                                <span class="line-through text-gray-400 text-xl">2,000,000₫</span>
+                                <span class="ml-2">1,500,000₫</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Tiết kiệm 25% - Ưu đãi có thời hạn!</p>
+                            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-2 px-4 rounded-full inline-block">
+                                ⏰ Còn lại 3 ngày
+                            </div>
+                        </div>
+                    </div>
+                `,
+                actionText: 'Nâng cấp Premium',
+                gradient: 'from-indigo-500 to-purple-600'
             }
         };
         
-        // Function to open modal
+        // Function to open modal with stretch effect
         function openModal(contentId) {
             const data = contentData[contentId];
             modalTitle.textContent = data.title;
@@ -744,26 +1507,132 @@
             modalAction.textContent = data.actionText;
             modalAction.className = `px-8 py-3 rounded-full font-semibold text-white transition-colors bg-gradient-to-r ${data.gradient} hover:opacity-90 gradient-button shadow-lg`;
             
+            // Determine stretch direction based on content ID
+            let stretchDirection, handElements;
+            switch(contentId) {
+                case 1:
+                    stretchDirection = 'stretch-in-horizontal';
+                    handElements = ['👈', '👉'];
+                    break;
+                case 2:
+                    stretchDirection = 'stretch-in-horizontal';
+                    handElements = ['👈', '👉'];
+                    break;
+                case 3:
+                    stretchDirection = 'stretch-in-vertical';
+                    handElements = ['👆', '👇'];
+                    break;
+                case 4:
+                    stretchDirection = 'stretch-in-vertical';
+                    handElements = ['👆', '👇'];
+                    break;
+                case 5:
+                    stretchDirection = 'stretch-in-diagonal';
+                    handElements = ['👆', '👇'];
+                    break;
+                default:
+                    stretchDirection = 'stretch-in-horizontal';
+                    handElements = ['👈', '👉'];
+            }
+            
             // Reset any previous animations
-            modalContent.classList.remove('modal-closing');
+            modalContent.className = 'modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform';
             modalOverlay.classList.remove('hidden');
+            
+            // Store current stretch direction for closing
+            modalContent.dataset.stretchDirection = stretchDirection;
+            
+            // Create and add hand elements
+            const existingHands = modalContent.querySelectorAll('.stretch-hands');
+            existingHands.forEach(hand => hand.remove());
+            
+            const handsContainer = document.createElement('div');
+            handsContainer.className = 'stretch-hands';
+            
+            if (stretchDirection === 'stretch-in-horizontal') {
+                const leftHand = document.createElement('div');
+                leftHand.className = 'hand-left';
+                leftHand.textContent = handElements[0];
+                
+                const rightHand = document.createElement('div');
+                rightHand.className = 'hand-right';
+                rightHand.textContent = handElements[1];
+                
+                handsContainer.appendChild(leftHand);
+                handsContainer.appendChild(rightHand);
+            } else if (stretchDirection === 'stretch-in-vertical') {
+                const upHand = document.createElement('div');
+                upHand.className = 'hand-up';
+                upHand.textContent = handElements[0];
+                
+                const downHand = document.createElement('div');
+                downHand.className = 'hand-down';
+                downHand.textContent = handElements[1];
+                
+                handsContainer.appendChild(upHand);
+                handsContainer.appendChild(downHand);
+            } else if (stretchDirection === 'stretch-in-diagonal') {
+                const diagonal1Hand = document.createElement('div');
+                diagonal1Hand.className = 'hand-diagonal-1';
+                diagonal1Hand.textContent = '👆';
+                
+                const diagonal2Hand = document.createElement('div');
+                diagonal2Hand.className = 'hand-diagonal-2';
+                diagonal2Hand.textContent = '👇';
+                
+                handsContainer.appendChild(diagonal1Hand);
+                handsContainer.appendChild(diagonal2Hand);
+            }
+            
+            modalContent.appendChild(handsContainer);
             
             // Trigger reflow to ensure the modal is visible before animation
             modalOverlay.offsetHeight;
+            
+            // Add stretch-in animation
+            modalContent.classList.add(stretchDirection);
+            
+            // Remove hands after animation completes
+            setTimeout(() => {
+                const hands = modalContent.querySelector('.stretch-hands');
+                if (hands) {
+                    hands.remove();
+                }
+            }, 450);
             
             // Prevent body scroll
             document.body.style.overflow = 'hidden';
         }
         
-        // Function to close modal
+        // Function to close modal with stretch effect
         function closeModalFunc() {
-            // Add closing animation
-            modalContent.classList.add('modal-closing');
+            // Get the stretch direction used for opening
+            const stretchDirection = modalContent.dataset.stretchDirection || 'stretch-in-horizontal';
+            
+            // Determine corresponding stretch-out direction
+            let stretchOutDirection;
+            switch(stretchDirection) {
+                case 'stretch-in-horizontal':
+                    stretchOutDirection = 'stretch-out-horizontal';
+                    break;
+                case 'stretch-in-vertical':
+                    stretchOutDirection = 'stretch-out-vertical';
+                    break;
+                case 'stretch-in-diagonal':
+                    stretchOutDirection = 'stretch-out-diagonal';
+                    break;
+                default:
+                    stretchOutDirection = 'stretch-out-horizontal';
+            }
+            
+            // Remove stretch-in classes and add stretch-out animation
+            modalContent.className = 'modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform';
+            modalContent.classList.add(stretchOutDirection);
             
             // Hide modal after animation completes
             setTimeout(() => {
                 modalOverlay.classList.add('hidden');
-                modalContent.classList.remove('modal-closing');
+                modalContent.className = 'modal-content rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform';
             }, 300);
             
             // Restore body scroll
@@ -839,17 +1708,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9930371fd010dd36',t:'MTc2MTIxMTgyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
-<script>
-  // Nếu đang mở .../index.html thì đổi sang .../ (không tải lại trang)
-  (function () {
-    var p = location.pathname;
-    if (/\/index\.html$/i.test(p)) {
-      var clean = p.replace(/\/index\.html$/i, '');
-      history.replaceState(null, '', clean + location.search + location.hash);
-    }
-  })();
-</script>
-
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'993c9e5295070a04',t:'MTc2MTM0MTg3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
